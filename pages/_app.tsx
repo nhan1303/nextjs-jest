@@ -1,6 +1,6 @@
 import React from "react";
 import type { AppProps } from "next/app";
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useGetList } from "hooks/useGetList";
 import {
   DEFAULT_ARTICLE_PARAMS,
@@ -49,7 +49,8 @@ function App({ Component, pageProps }: AppProps) {
     setSize(0);
   };
   console.log("test data", data);
-  if (isValidating && !error) return <Box>Loading...</Box>;
+  const isLoading = isValidating && !error
+  // if (isValidating && !error) return <Box>Loading...</Box>;
 
   if (error) return <Box>{error}</Box>;
 
@@ -71,7 +72,8 @@ function App({ Component, pageProps }: AppProps) {
         return <ArticleList key={index} data={item.contents} />;
       })}
 
-      <Button onClick={handleLoadmore}>Load more</Button>
+      {isLoading && <CircularProgress/>}
+      {!isLoading && <Button onClick={handleLoadmore}>Load more</Button>}
     </Box>
   );
 }

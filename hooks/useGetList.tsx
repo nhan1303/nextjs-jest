@@ -92,7 +92,7 @@ export const useGetList = <Data, Params = Record<string, string>, Error = any>(
     },
     {
       revalidateOnFocus: false,
-      fallbackData: undefined,
+      // fallbackData: [],
     }
   );
 
